@@ -4,21 +4,46 @@ header {
     flex-direction: row;
     align-items: center;
     padding-left: 30px;
-    img    {
+    padding-bottom: 20px;
+    justify-content: space-between;
+    gap: 400px;
+    position: fixed;
+    img {
         width: 170px;
     }
+
+    #search {
+        display: flex;
+        padding: 14px;
+        align-items: flex-start;
+        gap: 8px;
+        border-radius: 8px;
+        border: 1px solid var(--White, #FFF);
+        background: #D07000;
+
+        input {
+            border: none;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0.0);
+            &::placeholder {
+                color: white;
+            }
+        }
+    }
 }
+
 nav {
     width: 100px;
     height: 100%;
-    position: fixed;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 80px;
+    align-self: flex-start;
     gap: 30px;
+    padding-left: 10px;
+margin-top: 100px;
     div {
-        
         &.active {
             border-radius: 8px;
             background: #D07000;
@@ -26,43 +51,133 @@ nav {
             padding: 15px;
         }
     }
-
 }
 
-section {
-    margin-left: 200px;
+section.Center {
+margin-top: 100px;
     .Food {
         margin-top: 20px;
-        width: 60%;
+        //width: 60%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         gap: 40px;
+
         div {
             flex: 1 1 180px;
-            -webkit-box-shadow: 0px 0px 39px -3px rgba(0,0,0,0.06);
-            -moz-box-shadow: 0px 0px 39px -3px rgba(0,0,0,0.06);
-            box-shadow: 0px 0px 39px -3px rgba(0,0,0,0.11);
+            -webkit-box-shadow: 0px 0px 39px -3px rgba(0, 0, 0, 0.06);
+            -moz-box-shadow: 0px 0px 39px -3px rgba(0, 0, 0, 0.06);
+            box-shadow: 0px 0px 39px -3px rgba(0, 0, 0, 0.11);
             border-radius: 10px;
             display: flex;
             align-items: center;
             flex-direction: column;
             padding: 15px 0px;
+
             img {
-                margin-top: -30px;
+                margin-top: -45px;
             }
         }
     }
+
     .filter {
         padding-bottom: 10px;
         display: flex;
         flex-direction: row;
         gap: 20px;
+
         div {
             &.active {
-            border-bottom: 3px solid #D07000;
+                border-bottom: 3px solid #D07000;
                 color: #D07000;
                 font-weight: 600;
+            }
+        }
+    }
+}
+
+section.container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: flex-start;
+    gap: 70px;
+    align-items: center;
+  
+    .korpa {
+        padding: 0px 20px;
+        align-self: flex-start;
+        width: 600px;
+
+        .Helper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .List {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            div {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+
+                img {
+                    width: 50px;
+                    aspect-ratio: 1/1;
+                }
+
+                .amount {
+                    background-color: #2D303E;
+                    padding: 10px;
+                    border-radius: 10px;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    aspect-ratio: 1 / 1;
+                   // padding: 0px 25px;
+                   justify-content: center;
+                    height: 30px;
+                    width: 30px;
+                    cursor: pointer;
+                }
+
+                .remove {
+                    border-radius: 8px;
+                    border: 1px solid var(--accents-red, #FF7CA3);
+                    display: flex;
+                    align-items: center;
+                    aspect-ratio: 1 / 1;
+                    padding: 10px;
+                    justify-content: center;
+                    height: 30px;
+                    width: 30px;
+                    cursor: pointer;
+
+                    img {
+                        width: 30px;
+                    }
+                    &:hover {
+                        background-color: #FF7CA3;
+                    }
+                }
+            }
+
+            button {
+                border-radius: 8px;
+                background: var(--ea-7-c-69, #D07000);
+                box-shadow: 0px 8px 24px 0px rgba(234, 124, 105, 0.30);
+                border: none;
+                display: flex;
+
+                padding: 14px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                color: white;
             }
         }
     }
