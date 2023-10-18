@@ -1,18 +1,31 @@
 import React, { useState } from "react";
 import "./Login.css";
-import logo from "./images/Logo.png";
-import ellipseImage1 from "./images/Ellipse 6.png";
-import ellipseImage2 from "./images/Ellipse 7.png";
-import ellipseImage3 from "./images/Ellipse 12.png";
-import ellipseImage4 from "./images/Ellipse 9.png";
+import logo from "../../asesst/BiteSquad.svg";
+import ellipseImage1 from "../../asesst/Ellipse6.png";
+import ellipseImage2 from "../../asesst/Ellipse7.png";
+import ellipseImage3 from "../../asesst/Ellipse12.png";
+import ellipseImage4 from "../../asesst/Ellipse9.png";
+import axios from "axios";
+//import Cookies from 'universal-cookie';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function LoginForm() {
+  const Navigate =useNavigate();
+  //const cookies = new Cookies();
+
   const [formData, setFormData] = useState({
-    mail: "",
+    email: "",
     password: "",
     rememberMe: false,
   });
-
+  useEffect(() => {
+    let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
+    if(cookieValue !== "") {
+      Navigate("/");
+    }
+})	
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -28,9 +41,17 @@ function LoginForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    await axios.post("http://4.232.160.128/api/login", formData)
+        .then(response => {
+            console.log(response.data.data.token);
+            const token = response.data.data.token;
+            Cookies.set('token', token, { expires: 7 });
+
+            Navigate("../Home");
+        })
   };
 
   return (
@@ -47,7 +68,7 @@ function LoginForm() {
           Mail
           <input
             type="email"
-            name="mail"
+            name="email"
             value={formData.mail}
             onChange={handleChange}
             placeholder="markomarkovic@gmail.com"

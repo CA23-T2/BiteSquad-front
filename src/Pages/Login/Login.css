@@ -156,7 +156,7 @@ body {
 
   width: 114px;
   height: 113px;
-  background: url('./images/Ellipse 6.png'), lightgray, no-repeat center;
+  background: url('../../asesst/Ellipse6.png'), lightgray, no-repeat center;
   background-size: cover;
   border-radius: 50%; 
 }
@@ -171,7 +171,7 @@ body {
 height: 78.271px;
 border-radius: 78.271px;
 flex-shrink: 0;
-  background: url('./images/Ellipse 7.png'), lightgray, no-repeat center;
+  background: url('../../asesst/Ellipse7.png'), lightgray, no-repeat center;
   background-size: cover;
   border-radius: 50%; 
 }
@@ -186,7 +186,7 @@ flex-shrink: 0;
   width: 52.181px;
   height: 52.181px;
 flex-shrink: 0;
-  background: url('./images/Ellipse 12.png'), lightgray 50% / cover no-repeat, #C4C4C4;
+  background: url('../../asesst/Ellipse12.png'), lightgray 50% / cover no-repeat, #C4C4C4;
   background-size: cover;
   border-radius: 52.181px; 
 }
@@ -203,7 +203,7 @@ flex-shrink: 0;
   height: 67.835px;
 border-radius: 78.271px;
 flex-shrink: 0;
-  background: url('./images/Ellipse 9.png'),lightgray 50% / cover no-repeat, #C4C4C4;
+  background: url('../../asesst/Ellipse9.png'),lightgray 50% / cover no-repeat, #C4C4C4;
   background-size: cover;
   border-radius: 67.835px; 
 }
@@ -238,4 +238,4 @@ flex-shrink: 0;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-}
+} 

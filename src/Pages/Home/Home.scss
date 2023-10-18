@@ -63,7 +63,7 @@ margin-top: 100px;
         flex-wrap: wrap;
         gap: 40px;
 
-        div {
+        div.Meal {
             flex: 1 1 180px;
             -webkit-box-shadow: 0px 0px 39px -3px rgba(0, 0, 0, 0.06);
             -moz-box-shadow: 0px 0px 39px -3px rgba(0, 0, 0, 0.06);
@@ -73,9 +73,30 @@ margin-top: 100px;
             align-items: center;
             flex-direction: column;
             padding: 15px 0px;
-
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
             img {
                 margin-top: -45px;
+            }
+            &:hover {
+                transform: scale(1.07);
+                color: white;
+                background-color: #D07000;
+            }
+            
+            .helper {
+                max-height: 20px;
+                align-items: center;
+                gap: 20px;
+                display: flex;
+                flex-direction: row;
+                span {
+                    font-size: 12px;
+                    img {
+                        width: 15px;
+                    }
+                }
             }
         }
     }
