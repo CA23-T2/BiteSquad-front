@@ -1,0 +1,189 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  .registration-form {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+  
+  }
+  
+  .registration-form h2 {
+    color: #FFA500; 
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .registration-form h3 {
+    color: #525252; 
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .registration-form label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .registration-form input[type="text"],
+  .registration-form input[type="email"],
+  .registration-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .registration-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .registration-form button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background: #D07000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .registration-form button:hover {
+    background: #BF6000; 
+  }
+  
+  .registration-form button:active {
+  
+    background: #A55000; 
+  }
+  
+  
+  .registration-form p {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .registration-form a {
+    color: #FFA500; 
+    text-decoration: none;
+  }
+  
+  .registration-form a:hover {
+    text-decoration: underline;
+  }
+  
+  .logo-center {
+    display: block;
+    margin: 0 auto; 
+  
+  }
+  
+  .name-wrapper {
+    display: flex;
+    justify-content: space-between;  
+    gap: 2.5rem;  
+    border: #DED2D9;
+  }
+  
+  .name-wrapper label {
+    flex: 1; 
+    margin: 0.5rem; 
+    border: #DED2D9;
+  }
+  .registration-form input::placeholder {
+    color: #E0E0E0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .registration-form label {
+    color: #828282;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  
+  .ellipse-style1 {
+    position: absolute;
+    top: 85px;   
+    left: 500px;  
+    bottom: 566px;
+    right:1000px;
+  
+    width: 114px;
+    height: 113px;
+    background: url('./images/Ellipse 6.png'), lightgray, no-repeat center;
+    background-size: cover;
+    border-radius: 50%; 
+  }
+  
+  .ellipse-style2 {
+    position: absolute;
+    top: 124px;   
+    left:1100px;  
+    bottom: 562px;
+    right: 154px;
+    width: 78.271px;
+  height: 78.271px;
+  border-radius: 78.271px;
+  flex-shrink: 0;
+    background: url('./images/Ellipse 7.png'), lightgray, no-repeat center;
+    background-size: cover;
+    border-radius: 50%; 
+  }
+  
+  .ellipse-style3 {
+    position: absolute;
+    top: 344px;   
+    left:500px;  
+    bottom: 368px;
+    right: 947px;
+    width: 78.271px;
+    width: 52.181px;
+    height: 52.181px;
+  flex-shrink: 0;
+    background: url('./images/Ellipse 12.png'), lightgray 50% / cover no-repeat, #C4C4C4;
+    background-size: cover;
+    border-radius: 52.181px; 
+  }
+  
+  
+  
+  .ellipse-style4 {
+    position: absolute;
+    top: 364px;  
+    left:1150px; 
+    bottom: 322px;
+    right: 320px;
+    width: 67.835px;
+    height: 67.835px;
+  border-radius: 78.271px;
+  flex-shrink: 0;
+    background: url('./images/Ellipse 9.png'),lightgray 50% / cover no-repeat, #C4C4C4;
+    background-size: cover;
+    border-radius: 67.835px;
+  }
+  
+  .boja-p{
+    color: #8CAAB9;
+  }
