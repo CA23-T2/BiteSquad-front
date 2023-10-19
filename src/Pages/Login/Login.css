@@ -149,8 +149,8 @@ body {
 
 .ellipse-style1 {
   position: absolute;
-  top: 350px;  
-  left: 390px;  
+   top: 40%;  
+  left: 23%; 
   bottom: 240px;
   right: 993px;
 
@@ -163,8 +163,8 @@ body {
 
 .ellipse-style2 {
   position: absolute;
-  top: 440px;   
-  left:1100px; 
+  top: 50%;
+  left: 63%;  
   bottom: 100px;
   right: 10px;
   width: 78.271px;
@@ -178,8 +178,8 @@ flex-shrink: 0;
 
 .ellipse-style3 {
   position: absolute;
-  top: 115px;   
-  left:450px;  
+  top: 13%;   
+  left: 26%;   
   bottom: 597px;
   right: 993px;
   width: 78.271px;
@@ -195,8 +195,8 @@ flex-shrink: 0;
 
 .ellipse-style4 {
   position: absolute;
-  top: 150px;  
-  left:1080px;  
+  top: 17%;
+  left: 62%;     
   bottom: 555px;
   right: 337px;
   width: 67.835px;
@@ -207,6 +207,7 @@ flex-shrink: 0;
   background-size: cover;
   border-radius: 67.835px; 
 }
+
 
 .boja-p{
   
@@ -238,4 +239,25 @@ flex-shrink: 0;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+<<<<<<< HEAD:src/Pages/Login/Login.css
 } 
+=======
+}
+
+@media (max-width: 1300px) {
+  .ellipse-style1,
+  .ellipse-style2,
+  .ellipse-style3,
+  .ellipse-style4 {
+      display: none;
+  }}
+
+@media (max-width: 480px) {
+  .ellipse-style1,
+  .ellipse-style2,
+  .ellipse-style3,
+  .ellipse-style4 {
+      display: none;
+  }
+}
+>>>>>>> 02de87434aa999cb239c1866c409234c9fb097c5:src/Pages/Home/Login/Login.css
