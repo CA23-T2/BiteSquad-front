@@ -125,8 +125,8 @@ body {
   
   .ellipse-style1 {
     position: absolute;
-    top: 85px;   
-    left: 500px;  
+    top: 9%;   
+    left: 29%;
     bottom: 566px;
     right:1000px;
   
@@ -139,8 +139,8 @@ body {
   
   .ellipse-style2 {
     position: absolute;
-    top: 124px;   
-    left:1100px;  
+    top: 14%;   
+    left: 63%;  
     bottom: 562px;
     right: 154px;
     width: 78.271px;
@@ -154,8 +154,8 @@ body {
   
   .ellipse-style3 {
     position: absolute;
-    top: 344px;   
-    left:500px;  
+    top: 40%;   
+    left: 29%;   
     bottom: 368px;
     right: 947px;
     width: 78.271px;
@@ -171,8 +171,8 @@ body {
   
   .ellipse-style4 {
     position: absolute;
-    top: 364px;  
-    left:1150px; 
+    top: 42%;   
+    left: 66%;
     bottom: 322px;
     right: 320px;
     width: 67.835px;
@@ -181,9 +181,61 @@ body {
   flex-shrink: 0;
     background: url('./images/Ellipse 9.png'),lightgray 50% / cover no-repeat, #C4C4C4;
     background-size: cover;
-    border-radius: 67.835px;
+    border-radius: 67.835px; 
   }
   
   .boja-p{
     color: #8CAAB9;
   }
+
+  @media (max-width: 1200px) {
+    .registration-form {
+        width: 90%;
+    }
+
+    .name-wrapper {
+        flex-direction: column; 
+    }
+    .ellipse-style1,
+    .ellipse-style2,
+    .ellipse-style3,
+    .ellipse-style4 {
+        display: none;
+    }
+  
+}
+
+
+@media (max-width: 768px) {
+    
+
+    .registration-form h2 {
+        font-size: 28px;
+    }
+
+    .registration-form h3 {
+        font-size: 20px;
+    }
+
+    .registration-form label {
+        font-size: 14px;
+    }
+
+    .registration-form input[type="text"],
+    .registration-form input[type="email"],
+    .registration-form input[type="password"],
+    .registration-form select {
+        font-size: 14px;
+    }
+
+    .registration-form button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    .ellipse-style1,
+    .ellipse-style2,
+    .ellipse-style3,
+    .ellipse-style4 {
+        display: none;
+    }
+}
