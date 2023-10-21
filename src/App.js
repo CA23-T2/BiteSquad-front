@@ -5,18 +5,20 @@ import Register from "./Pages/Register/Register"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 function App() {
 
-  let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
   const [userMail, setMail] = useState();
   const [userRole, setRole] = useState();
-  console.log(cookieValue)
-  
+ 
+  const token = Cookies.get('token');
+console.log(token);
   useEffect(() => {
     const fetchApiData = async () => {
       await axios.get("http://4.232.160.128/api/user", {
         headers: {
-          Authorization: `Bearer ${cookieValue}`
+          Authorization: `Bearer ${token}`
         }
       })
         .then((response) => {
@@ -25,11 +27,11 @@ function App() {
          // setRole(response.data.success.role_id);
         })
     }
-    if (cookieValue !== "") {
+    if (token === null) {
       fetchApiData();
     }
 
-  }, [1]);
+  }, []);
   return (
     <BrowserRouter>
       <Routes>

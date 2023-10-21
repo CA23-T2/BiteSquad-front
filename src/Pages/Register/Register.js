@@ -6,7 +6,9 @@ import ellipseImage2 from "../../asesst/Ellipse7.png";
 import ellipseImage3 from "../../asesst/Ellipse12.png";
 import ellipseImage4 from "../../asesst/Ellipse9.png";
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 function RegisterForm() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
         surname: "",
@@ -79,7 +81,7 @@ function RegisterForm() {
                 </label>*/}
                 <button type="submit"><strong>Registruj se</strong></button>
             </form>
-            <p className='boja-p'>Da li imate nalog? <a href="#">Prijavi se</a></p>
+            <p className='boja-p'>Da li imate nalog? <Link to="/Login">Prijavi se</Link></p>
         </div>
     );
 }

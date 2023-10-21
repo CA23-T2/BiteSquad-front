@@ -23,7 +23,7 @@ function LoginForm() {
   useEffect(() => {
     let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
     if(cookieValue !== "") {
-      Navigate("/");
+      Navigate("/Home");
     }
 })	
   const handleChange = (e) => {
