@@ -12,10 +12,14 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Config from "../../config"
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function LoginForm() {
-  const Navigate =useNavigate();
+  const Navigate = useNavigate();
   //const cookies = new Cookies();
-
+  const notify = (e) => toast.error(e, {
+    position: "top-center", theme: "colored"
+  });
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,10 +27,10 @@ function LoginForm() {
   });
   useEffect(() => {
     let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
-    if(cookieValue !== "") {
+    if (cookieValue !== "") {
       Navigate("/Home");
     }
-})	
+  })
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -45,23 +49,27 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    await axios.post(Config.apiUrl+"api/login", formData)
-        .then(response => {
-            console.log(response.data.data.token);
-            const token = response.data.data.token;
-            Cookies.set('token', token, { expires: 7 });
+    await axios.post(Config.apiUrl + "api/login", formData)
+      .then(response => {
+        console.log(response.data.data.token);
+        const token = response.data.data.token;
+        Cookies.set('token', token, { expires: 7 });
 
-            Navigate("/Home");
-        })
+        Navigate("/Home");
+      })
+      .catch(error => {
+        console.log(error.code)
+        notify(error.response.data.message)
+      })
   };
 
   return (
-    <div className="registration-form">
-      <img src={logo} alt="BiteSquad Logo" className="logo-center" />
-      <br/>
-      <br/>
-      <img src={ellipseImage1} alt="Ellipse Image" className="ellipse-style1" />
-     
+    <>    <div className="registration-form">
+
+      <img src={logo} alt="BiteSquad Logo" className='logo-center' />
+
+
+
       <h3 className="h3-color">Prijavi se</h3>
 
       <form onSubmit={handleSubmit}>
@@ -75,11 +83,7 @@ function LoginForm() {
             placeholder="markomarkovic@gmail.com"
           />
         </label>
-        <img
-          src={ellipseImage3}
-          alt="Ellipse Image"
-          className="ellipse-style3"
-        />
+
         <label>
           Password
           <input
@@ -90,24 +94,19 @@ function LoginForm() {
             placeholder="***************"
           />
         </label>
-        <img
-          src={ellipseImage4}
-          alt="Ellipse Image"
-          className="ellipse-style4"
-        />
+
         <div className="checkbox-and-forgot">
           <label className="checkbox-label">
             <input
               type="checkbox"
               name="rememberMe"
               checked={formData.rememberMe}
-              onChange={handleCheckboxChange}/>
+              onChange={handleCheckboxChange} />
             <span>sacuvaj moje podatke</span>
           </label>
           <span className="zaboravili-lozinku">Zaboravili ste lozinku?</span>
         </div>
-        <br/>
-      <img src={ellipseImage2} alt="Ellipse Image" className="ellipse-style2" />
+       
         <button type="submit">
           <strong>Prijavi se</strong>
         </button>
@@ -115,7 +114,12 @@ function LoginForm() {
       <p className="boja-p">
         Nemate nalog? <Link to="/register">Registruj se</Link>
       </p>
+
     </div>
+      <ToastContainer />
+
+    </>
+
   );
 }
 

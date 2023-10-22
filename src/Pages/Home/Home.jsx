@@ -275,7 +275,7 @@ function App(props) {
                                     meals.filter(item => e.id === item.id).map(el => {
 
                                         return (
-                                            <div>
+                                            <div className="KorpaDiv">
                                                 <img src={require("../../asesst/pizza.png")} alt="" />
 
                                                 <h3>{el.meal_name}</h3>

@@ -17,7 +17,7 @@ import LoadingScreen from "./LoadingScreen"
 function App() {
 
   const [userMail, setMail] = useState();
-  const [Name, setName] = useState();
+  const [Name, setName] = useState("");
   const [username, setUsername] = useState();
   const [userRole, setRole] = useState();
   const [load, setLoad] = useState(true);
@@ -46,34 +46,37 @@ function App() {
 
     }
 
-  }, [1]);
-
-  if (load === true) {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path='/'>
-            <Route path="Home" element={<><Header /><Home username={username} /></>} />
-            <Route path='/item' element={<><Header /><Item /></>} />
-            <Route path='/history' element={<><History /></>} />
-            <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} /></>} />
-            <Route index element={<Login />} />
-
-          </Route>
-          <Route>
-          <Route path='/login' element={<Login />} />
-
-            <Route path="/Register" element={<Register />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+  });
+  useEffect(() => {
+    if (Name !== "")
+      setLoad(false);
+  })
 
 
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={load === true ? <LoadingScreen /> : null}>
+          <Route path="Home" element={<><Header /><Home username={username} /></>} />
+          <Route path='/item' element={<><Header /><Item /></>} />
+          <Route path='/history' element={<><History /></>} />
+          <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} /></>} />
+          <Route index element={<Login />} />
 
-  } else {
-    return (<LoadingScreen />)
-  }
+        </Route>
+        <Route>
+          <Route path='/login' element={<Login />}/>
+          <Route path="/Register" element={<Register />}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
+
+  );
+
+
+
+
 
 }
 

@@ -369,6 +369,7 @@ section.container {
                 background-color: rgba(0, 0, 0, 0.0);
                 color: white;
                 cursor: pointer;
+               
             }
         }
 
@@ -393,6 +394,11 @@ section.container {
             width: 80%;
             background: var(--primary-gradient, linear-gradient(109deg, #F9881F 23.73%, #FF774C 79.34%));
             box-shadow: 0px 10px 30px 0px rgba(202, 66, 17, 0.10);
+            &:hover {
+                background: #D07000;
+
+            }
+            cursor: pointer;
         }
     }
 }
@@ -426,7 +432,7 @@ section.container {
                 align-items: center;
                 min-height: 46vh;
                 max-height: 46vh;
-                div {
+                div.KorpaDiv {
                 transition: 0.4s;
 
                     &:hover {
@@ -519,7 +525,7 @@ section.container {
             flex-wrap: nowrap;
             flex-direction: row;
             overflow-x: scroll;
-            padding-top: 20px;
+            padding-top: 40px;
             overflow-y: hidden;
 
             div.Meal {

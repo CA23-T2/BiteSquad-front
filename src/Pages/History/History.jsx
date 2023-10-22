@@ -90,7 +90,7 @@ function History(props) {
 
 
             <div className="krug">
-                <img src={require("../../asesst/bsW.png")} alt="" />
+                <img onClick={() => Navigate("/Home")}src={require("../../asesst/bsW.png")} alt="" />
             </div>
             < header>
                 <img src={logo} alt="" />

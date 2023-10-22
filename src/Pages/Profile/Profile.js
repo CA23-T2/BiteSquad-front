@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
 import Config from "../../config";
+import Nav from "../../Nav";
 function Profile(props) {
     const Navigate = useNavigate()
     const [edit, setEdit] = useState(false);
@@ -57,9 +58,9 @@ function Profile(props) {
                     </div>
                 </div>
                 <div className="Settings">
-                    <div>
+                    <div onClick={() => Navigate("/Home")}>
                         <img src={Exit} alt="" />
-                        <h4>Odjavi se</h4>
+                        <h4>Pocetna strana</h4>
                     </div>
                     <div>
                         <img src={Exit} alt="" />
@@ -121,6 +122,7 @@ function Profile(props) {
                     </div>
                 </div>
             </div>
+            <Nav></Nav>
         </>
     )
 }
