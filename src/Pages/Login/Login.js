@@ -24,7 +24,7 @@ function LoginForm() {
   });
   useEffect(() => {
     
-    if (Cookies.get("token") === null) {
+    if (Cookies.get("token") != null) {
       Navigate("/Home");
     }
   })
