@@ -91,14 +91,14 @@ function History(props) {
 
 
             <div className="krug">
-                <img onClick={() => Navigate("/Home")}src={require("../../asesst/bsW.png")} alt="" />
+                <img onClick={() => Navigate("/Home")} src={require("../../asesst/bsW.png")} alt="" />
             </div>
             < header>
                 <img src={logo} alt="" />
             </header>
             <div className="Narudzbe">
                 {
-                   orders  ? orders.map((e, key) => {
+                    orders ? orders.map((e, key) => {
 
                         return (
                             <div className="Narudzba" key={key} onClick={() => { activeOrder === e.id ? setActive(0) : setActive(e.id) }} id={e.id === activeOrder ? "opened" : ""} >
@@ -116,7 +116,8 @@ function History(props) {
                                     {e.meals.map((el, key) => {
                                         return (
                                             <div className="Meal">
-                                                <img src={require("../../asesst/burger.png")} alt="" />
+                                                <img src={Config.apiUrl + el.image_url} alt="meal" />
+
                                                 <p>{el.meal_name}</p>
 
                                                 {e.status === "Gotovo" ? <span className="rate" onClick={() => setMeal(el.id)}>Ocijeni</span> : <span className="rate" id="disabled" onClick={() => notify("Obrok možrte ocijeniti samo poslije konzumacije")}>Ocijeni</span>}
@@ -163,7 +164,7 @@ function History(props) {
                                                 <span className="Status">{e.status}</span>
                                             </div>
 
-                                            {e.status === "Gotovo" ? null : <span className="otkazi" onClick={() => { cancel(e.id);  setActive(0) }}>Otkaži</span>}
+                                            {e.status === "Gotovo" ? null : <span className="otkazi" onClick={() => { cancel(e.id); setActive(0) }}>Otkaži</span>}
 
                                         </div>
                                         <h2>Obroci</h2>
@@ -171,7 +172,8 @@ function History(props) {
                                         {e.meals.map((el, key) => {
                                             return (
                                                 <><div className="Meal">
-                                                    <img src={require("../../asesst/burger.png")} alt="" />
+                                                    <img src={Config.apiUrl + el.image_url} alt="meal" />
+
                                                     <p>{el.meal_name}</p>
 
                                                     <span id="kolicina">{el.quantity}</span>

@@ -87,8 +87,9 @@ function App(props) {
         })
             .then(response => {
                 console.log(response)
+                notify(response.data);
                 notify(response.data.message);
-                setCart([])
+                setCart([]);
             })
     }
     //console.log(cart.some(item => item.id === 1))
@@ -263,7 +264,8 @@ function App(props) {
 
                                         return (
                                             <div key={key} className="KorpaDiv">
-                                                <img src={require("../../asesst/pizza.png")} alt="" />
+                                               
+                                                <img src={Config.apiUrl + el.image_url} alt="meal" />
 
                                                 <h3>{el.meal_name}</h3>
                                                 <div className="Desktop">
@@ -316,7 +318,7 @@ function App(props) {
                         {meals.filter((meal) => meal.id === FoodPopUp).map((e, key) => {
                             return (
                                 <div key={key}>
-                                    <Item key={key} korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} />
+                                    <Item key={key} img={e.image_url} korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} />
                                 </div>
                             )
                         })}
