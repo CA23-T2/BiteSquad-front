@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Config from "../../config";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ReactStars from "react-rating-stars-component";
 import Nav from "../../Nav";
 import arrw from "../../asesst/arrw.svg";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function History(props) {
     const Navigate = useNavigate()
     const token = Cookies.get("token")
@@ -18,6 +19,11 @@ function History(props) {
     const [rate, setRate] = useState(0);
     const [feedback, setfeedback] = useState("");
     const [mealToRate, setMeal] = useState(0)
+    const ref = useRef(null);
+    useOutsideAlerter(ref);
+    const notify = (e) => toast.success(e, {
+        position: "top-center",
+    });
     useEffect(() => {
         const Orders = async () => {
             await axios.get(Config.apiUrl + "api/orders", {
@@ -34,6 +40,16 @@ function History(props) {
 
 
     }, [])
+    const cancel = async (e) => {
+        await axios.delete(Config.apiUrl + "api/orders/" + e, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                console.log(response)
+            })
+    }
     const rateMeal = async () => {
         await axios.post(Config.apiUrl + "api/meals/" + mealToRate + "/ratings/new", {
             rating: rate,
@@ -52,6 +68,23 @@ function History(props) {
         setRate(newRating)
     };
     const [activeOrder, setActive] = useState(0)
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+
+                    setMeal(0);
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        });
+    }
     return (
         <div className="History">
 
@@ -64,7 +97,7 @@ function History(props) {
             </header>
             <div className="Narudzbe">
                 {
-                    orders.map((e, key) => {
+                   orders  ? orders.map((e, key) => {
 
                         return (
                             <div className="Narudzba" key={key} onClick={() => { activeOrder === e.id ? setActive(0) : setActive(e.id) }} id={e.id === activeOrder ? "opened" : ""} >
@@ -85,7 +118,8 @@ function History(props) {
                                                 <img src={require("../../asesst/burger.png")} alt="" />
                                                 <p>{el.meal_name}</p>
 
-                                                {e.status === "Dostavljeno" ? <span className="rate" onClick={() => setMeal(el.id)}>Ocijeni</span> : <span className="rate" id="disabled" onClick={() => setMeal(el.id)}>Ocijeni</span>}
+                                                {e.status === "Gotovo" ? <span className="rate" onClick={() => setMeal(el.id)}>Ocijeni</span> : <span className="rate" id="disabled" onClick={() => notify("Obrok možrte ocijeniti samo poslije konzumacije")}>Ocijeni</span>}
+
                                                 <span><p>Količina</p>{el.quantity}</span>
                                                 <span><p>Cijena</p>{el.price}$</span>
                                             </div>
@@ -95,14 +129,19 @@ function History(props) {
 
                             </div>
                         )
-                    })
+                    }) : <h1>Nema postojecih narudžbi</h1>
                 }
 
                 <br />
                 <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
 
-            {activeOrder !== 0 ?
+            {activeOrder !== 0 & window.innerWidth < 426 ?
                 <div className="popup">
                     <div className="Order">
 
@@ -111,7 +150,7 @@ function History(props) {
 
                                 return (
                                     <>
-                                    <h3><img id="leftarw" onClick={() => setActive(0)} src={arrw} alt="" />Poružbina #{e.id}</h3>
+                                        <h3><img id="leftarw" onClick={() => setActive(0)} src={arrw} alt="" />Poružbina #{e.id}</h3>
                                         <div className="Help">
 
                                             <span id="date">
@@ -122,8 +161,8 @@ function History(props) {
                                                 <p>Status:</p>
                                                 <span className="Status">{e.status}</span>
                                             </div>
-                                            
-                                            {e.status === "Gotovo" ? null : <span className="otkazi">Otkaži</span>}
+
+                                            {e.status === "Gotovo" ? null : <span className="otkazi" onClick={() => { cancel(e.id); notify("Porudžbina uspjesno otkazana"); setActive(0) }}>Otkaži</span>}
 
                                         </div>
                                         <h2>Obroci</h2>
@@ -137,11 +176,18 @@ function History(props) {
                                                     <span id="kolicina">{el.quantity}</span>
                                                     <span>{el.price}$</span>
                                                 </div>
-                                                    {e.status === "Gotovo" ? <span className="rate" onClick={() => setMeal(el.id)}>Ocijeni</span> : <span className="rate" id="disabled" >Ocijeni</span>}
+                                                    {e.status === "Gotovo" ? <span className="rate" onClick={() => setMeal(el.id)}>Ocijeni</span> : <span className="rate" id="disabled" onClick={() => notify("Obrok možrte ocijeniti samo poslije konzumacije")}>Ocijeni</span>}
                                                 </>
 
                                             )
                                         })}
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
 
                                     </>
 
@@ -154,7 +200,7 @@ function History(props) {
                 : null}
             {mealToRate !== 0 ?
                 <div className="popup">
-                    <div className="ratingMeal">
+                    <div className="ratingMeal" ref={ref}>
                         <h3>Vaša ocjena</h3>
                         <ReactStars
                             count={5}
@@ -164,11 +210,13 @@ function History(props) {
                             color="#B3B4BA"
                         />
                         <input type="text" onChange={(e) => setfeedback(e.currentTarget.value)} placeholder="Upisi komentar" />
-                        <button onClick={() => { rateMeal(); setMeal(0) }}>Ocijeni</button>
+                        <button onClick={() => { rateMeal(); setMeal(0); notify("Obrok uspjesno ocijenjen") }}>Ocijeni</button>
                     </div>
                 </div>
                 : null}
             <Nav></Nav>
+            <ToastContainer />
+
         </div>
     )
 }

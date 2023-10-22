@@ -39,28 +39,30 @@ function App() {
           setUsername(response.data.username)
         })
     }
-    if (token != null) {
+    if (!token || token === null) {
+      console.log("a")
+    } else {
       fetchApiData();
+
     }
 
-  }, []);
-  useEffect(() => {
-    window.addEventListener("load", () => {
-      setLoad(false);
-    })
-  })
+  }, [1]);
+
   if (load === true) {
     return (
       <BrowserRouter>
         <Routes>
           <Route path='/'>
-            <Route index element={<><Header /><Home username={username} /></>} />
+            <Route path="Home" element={<><Header /><Home username={username} /></>} />
             <Route path='/item' element={<><Header /><Item /></>} />
             <Route path='/history' element={<><History /></>} />
-            <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} /><Nav></Nav></>} />
+            <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} /></>} />
+            <Route index element={<Login />} />
+
           </Route>
           <Route>
-            <Route path="/Login" element={<Login />} />
+          <Route path='/login' element={<Login />} />
+
             <Route path="/Register" element={<Register />} />
           </Route>
         </Routes>

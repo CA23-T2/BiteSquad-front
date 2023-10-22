@@ -1,6 +1,6 @@
 .krug {
 
-    top: -230px;
+    top: -250px;
     height: 210px;
     width: 130vw;
 
@@ -146,6 +146,9 @@
         width: 90%;
     }
 }
+.Order, .popup2 {
+    display: none;
+}
 
 @media (max-width: 426px) {
     .krug {
@@ -184,6 +187,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow-y: auto;
         h2 {
             margin-left: 20px;
         }

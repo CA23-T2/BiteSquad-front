@@ -24,7 +24,7 @@ function LoginForm() {
   useEffect(() => {
     let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
     if(cookieValue !== "") {
-      Navigate("/");
+      Navigate("/Home");
     }
 })	
   const handleChange = (e) => {
@@ -51,7 +51,7 @@ function LoginForm() {
             const token = response.data.data.token;
             Cookies.set('token', token, { expires: 7 });
 
-            Navigate("/");
+            Navigate("/Home");
         })
   };
 

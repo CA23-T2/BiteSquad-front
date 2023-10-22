@@ -10,7 +10,7 @@ function Nav() {
     const Navigate = useNavigate()
     return (
         <nav>
-            <div className="active">
+            <div onClick={() => Navigate("/")}className="active">
                 <img src={home} alt="" />
             </div>
             <div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Register.css'; 
 import logo from "../../asesst/BiteSquad.svg";
 import ellipseImage1 from "../../asesst/Ellipse6.png";
@@ -8,8 +8,16 @@ import ellipseImage4 from "../../asesst/Ellipse9.png";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Config from "../../config.js"
-
+import Cookies from 'js-cookie';
 function RegisterForm() {
+  const Navigate =useNavigate();
+
+    useEffect(() => {
+        let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if(cookieValue !== "") {
+          Navigate("/Home");
+        }
+    })
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
@@ -33,7 +41,11 @@ function RegisterForm() {
         console.log(formData);
         await axios.post(Config.apiUrl+"api/register", formData)
         .then(response => {
-            console.log(response);
+            console.log(response.data.data.token);
+            const token = response.data.data.token;
+            Cookies.set('token', token, { expires: 7 });
+
+            Navigate("/Home");
         })
     };
 
