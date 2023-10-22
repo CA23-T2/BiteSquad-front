@@ -1,4 +1,4 @@
-import logo from './asesst/logo.svg';
+
 import Home from "./Pages/Home/Home"
 import Login from "./Pages/Login/Login"
 import Register from "./Pages/Register/Register"
@@ -9,9 +9,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Config from "./config.js"
 import Item from "./Pages/Item/Item"
-import Cart from './Pages/Cart/Cart';
 import Profile from './Pages/Profile/Profile';
-import Nav from './Nav';
 import History from "./Pages/History/History"
 import LoadingScreen from "./LoadingScreen"
 function App() {
@@ -20,9 +18,8 @@ function App() {
   const [Name, setName] = useState("");
   const [username, setUsername] = useState();
   const [userRole, setRole] = useState();
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
   const token = Cookies.get('token');
-  console.log(token);
   useEffect(() => {
     const fetchApiData = async () => {
 
@@ -32,7 +29,6 @@ function App() {
         }
       })
         .then((response) => {
-          console.log(response);
           setName(response.data.first_name + " " + response.data.last_name)
           setRole(response.data.role);
           setMail(response.data.email);
@@ -47,10 +43,7 @@ function App() {
     }
 
   });
-  useEffect(() => {
-    if (Name !== "")
-      setLoad(false);
-  })
+ 
 
 
   return (
@@ -60,7 +53,7 @@ function App() {
           <Route path="Home" element={<><Header /><Home username={username} /></>} />
           <Route path='/item' element={<><Header /><Item /></>} />
           <Route path='/history' element={<><History /></>} />
-          <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} /></>} />
+          <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} role={userRole} /></>} />
           <Route index element={<Login />} />
 
         </Route>

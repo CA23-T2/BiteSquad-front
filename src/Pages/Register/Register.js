@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Register.scss'; 
 import logo from "../../asesst/BiteSquad.svg";
-import ellipseImage1 from "../../asesst/Ellipse6.png";
-import ellipseImage2 from "../../asesst/Ellipse7.png";
-import ellipseImage3 from "../../asesst/Ellipse12.png";
-import ellipseImage4 from "../../asesst/Ellipse9.png";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Config from "../../config.js"
@@ -13,12 +9,11 @@ function RegisterForm() {
   const Navigate =useNavigate();
 
     useEffect(() => {
-        let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
-        if(cookieValue !== "") {
-          Navigate("/Home");
-        }
+        if (Cookies.get("token") !== "") {
+            Navigate("/Home");
+          }
     })
-    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         surname: "",

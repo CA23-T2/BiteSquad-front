@@ -1,6 +1,5 @@
 import "./History.scss"
 import logo from "../../asesst/BiteSquad.svg";
-import clock from "../../asesst/clck.svg";
 import arrow from "../../asesst/arrowDown.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -37,9 +36,7 @@ function History(props) {
                 })
         }
         Orders();
-
-
-    }, [])
+    }, [token])
     const cancel = async (e) => {
         await axios.delete(Config.apiUrl + "api/orders/" + e, {
             headers: {

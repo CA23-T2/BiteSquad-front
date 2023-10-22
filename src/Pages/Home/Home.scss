@@ -92,6 +92,9 @@ z-index: 100;
             margin-top: auto;
             justify-self: end;
         }
+        &#cart {
+            display: none;
+        }
     }
 }
 
@@ -507,9 +510,18 @@ section.container {
             border-radius: 100%;
         }
 
-        #logout {
+        #logout{
             display: none;
         }
+        #profile {
+            display: none;
+        }
+        div {
+            &#cart {
+                display: initial;
+            }
+        }
+        
     }
 
     section.Center {

@@ -4,7 +4,7 @@ import clock from "../../asesst/clck.svg";
 import arrow from "../../asesst/arrw.svg";
 import Exit from "../../asesst/Exit.svg"
 
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
@@ -14,7 +14,6 @@ function Profile(props) {
     const Navigate = useNavigate()
     const [edit, setEdit] = useState(false);
     const token = Cookies.get("token")
-    const [name, setName] = useState(props.name)
     const [username, setUsername] = useState(props.username)
     const EditProfile = async () => {
         await axios.post(Config.apiUrl + "api/users/update", {

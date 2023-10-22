@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import trash from "../../asesst/Trash.svg"
+
 import Cookies from 'js-cookie';
 function Cart (props) {
 const cart = Cookies.get("cart");
@@ -14,11 +13,6 @@ console.log(cart)
         <hr />
         <div className="List">
             {
-                
-                
-        
-
-
 
             }
             <button>Potvrdi</button>

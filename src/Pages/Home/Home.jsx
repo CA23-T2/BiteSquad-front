@@ -1,11 +1,6 @@
 
 import home from "../../asesst/home.svg"
-import settings from "../../asesst/Setting.svg"
-
-import message from "../../asesst/Message.svg"
-import notifi from "../../asesst/Notification.svg";
 import users from "../../asesst/2User.svg";
-import BiteSquad from "../../asesst/BiteSquad.svg"
 import trash from "../../asesst/Trash.svg"
 import fire from "../../asesst/fire.svg"
 import clock from "../../asesst/clock.svg"
@@ -14,8 +9,6 @@ import Exit from "../../asesst/Exit.svg"
 import bar from "../../asesst/bar.svg"
 import burger from "../../asesst/burger.svg"
 import arr from "../../asesst/arr.svg"
-
-
 import history from "../../asesst/history.svg"
 import cartt from "../../asesst/cart.svg"
 import "./Home.scss";
@@ -23,13 +16,12 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
-import Nav from "../../Nav";
 import Item from "../Item/Item"
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Config from "../../config";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function App(props) {
     const notify = (e) => toast.success(e, {
         position: "top-center",
@@ -37,10 +29,8 @@ function App(props) {
     const ref = useRef(null);
     useOutsideAlerter(ref);
     // Dohvati podatke iz localStorage pri inicijalizaciji komponente
-    const [startDate, setStartDate] = useState(new Date());
     const token = Cookies.get('token');
     const crt = Cookies.get('cart');
-    console.log(crt)
     const Navigate = useNavigate();
     const [meals, SetMeals] = useState([]);
     const [date, Setdate] = useState();
@@ -57,7 +47,7 @@ function App(props) {
         }
     })
     useEffect(() => {
-        
+
         const FetchMeals = async () => {
             await axios("http://4.232.160.128/api/meals", {
                 headers: {
@@ -65,7 +55,6 @@ function App(props) {
                 }
             })
                 .then(response => {
-                    console.log(response.data.data)
                     SetMeals(response.data.data[0].data)
                 })
         }
@@ -97,7 +86,6 @@ function App(props) {
             }
         })
             .then(response => {
-                console.log(response);
                 notify("Poružbina uspješno poslata");
             })
     }
@@ -108,7 +96,7 @@ function App(props) {
             azurirajKolicinu(e.id, e.kolicina)
         } else {
             setCart([...cart, { id: e.id, name: e.name, kolicina: e.kolicina, price: Number(e.price) * e.kolicina }]); setAmount(1); setFoodPopUp(0);
-        notify("Obrok dodat u korpu");
+            notify("Obrok dodat u korpu");
 
         }
 
@@ -127,7 +115,6 @@ function App(props) {
         setFoodPopUp(0) // Postavljamo ažuriranu kopiju niza kao novo stanje
     };
     const [page, setPage] = useState("home")
-    console.log(cart);
     let totalPrice = 0;
     const currentDate = new Date();
 
@@ -136,7 +123,6 @@ function App(props) {
     sevenDaysFromNow.setDate(currentDate.getDate() + 7);
 
     // Pretvorite ova dva datuma u format koji očekuje input date
-    const currentDateFormatted = currentDate.toISOString().split('T')[0];
     const sevenDaysFromNowFormatted = sevenDaysFromNow.toISOString().split('T')[0];
 
 
@@ -160,9 +146,9 @@ function App(props) {
         <>
 
             <header className="Mob">
-                {page != "home" ? <img width={10} onClick={() => { setPage("home"); setFoodPopUp(0) }} src={arr} alt="" /> : <img src={bar} alt="" />}
+                {page !== "home" ? <img width={10} onClick={() => { setPage("home"); setFoodPopUp(0) }} src={arr} alt="arrow" /> : <img src={bar} alt="bar" />}
                 <h3>Kompanija</h3>
-                <img onClick={() => Navigate("/Profile")} className="ProfImg" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" />
+                <img onClick={() => Navigate("/Profile")} className="ProfImg" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="profimg" />
 
 
             </header>
@@ -176,21 +162,19 @@ function App(props) {
                     <div>
                         <img src={history} onClick={() => Navigate("/history")} alt="" />
                     </div>
-                    <div>
+                    <div id="cart">
                         <img src={cartt} onClick={() => setPage("cart")} alt="" />
                     </div>
-                    <div>
+                    <div id="profile">
                         <img onClick={() => Navigate("/profile")} src={users} alt="" />
                     </div>
-                    <div>
-                        <img src={settings} alt="" />
-                    </div>
+
                     <div id="logout">
                         <img src={Exit} onClick={() => { Cookies.remove("token"); Navigate("/Login") }} alt="" />
                     </div>
                 </nav>
                 <section className="Center">
-                    <h2 class="MobH2">Uživajte u ukusnoj hrani</h2>
+                    <h2 className="MobH2">Uživajte u ukusnoj hrani</h2>
                     <div className="filter">
                         <div onClick={e => setFilter(0)} className={filter === 0 ? "active" : null}>
                             <div className="helper">
@@ -198,9 +182,9 @@ function App(props) {
                                 <p>Svi</p>
                             </div>
                         </div>
-                        {categories.map(item => {
+                        {categories.map((item, key) => {
                             return (
-                                <div onClick={e => { setFilter(item.id); }} className={filter === item.id ? "active" : null}>
+                                <div key={key} onClick={e => { setFilter(item.id); }} className={filter === item.id ? "active" : null}>
                                     <div className="helper">
                                         <img src={burger} alt="" />
                                         <p>{item.name}</p>
@@ -218,9 +202,10 @@ function App(props) {
 
                         {
                             filter === 0 ?
-                                meals.map((e) => {
-                                    return (<div onClick={(event) => { setFoodPopUp(e.id); setPage("item") }} className="Meal">
-                                        <img src={require("../../asesst/burger.png")} alt="" />
+                                meals.map((e, key) => {
+                                    return (<div key={key} onClick={(event) => { setFoodPopUp(e.id); setPage("item") }} className="Meal">
+                                        <img src={Config.apiUrl + e.image_url} alt="meal" />
+
                                         <h3>{e.meal_name}</h3>
                                         <p>{e.description}</p>
                                         <div className="helper">
@@ -231,15 +216,15 @@ function App(props) {
 
                                     </div>)
                                 }) :
-                                meals.filter(meal => meal.category_id === filter).map((e) => {
-                                    return (<div onClick={(event) => setFoodPopUp(e.id)} className="Meal">
-                                        <img src={Config.apiUrl + e.image_url} alt="" />
+                                meals.filter(meal => meal.category_id === filter).map((e, key) => {
+                                    return (<div key={key} onClick={(event) => setFoodPopUp(e.id)} className="Meal">
+                                        <img src={Config.apiUrl + e.image_url} alt="meal" />
                                         <h3>{e.meal_name}</h3>
                                         <p>{e.description}</p>
                                         <div className="helper">
-                                            <span><img src={star} alt="" /> 4+</span>
-                                            <span><img src={fire} alt="" /> 300kcal</span>
-                                            <span><img src={clock} alt="" /> 35min</span>
+                                            <span><img src={star} alt="star" /> 4+</span>
+                                            <span><img src={fire} alt="fire" /> 300kcal</span>
+                                            <span><img src={clock} alt="clock" /> 35min</span>
                                         </div>
 
                                     </div>)
@@ -269,13 +254,13 @@ function App(props) {
                     <hr />
                     <div className="List">
                         {
-                            cart.length > 0 ? cart.map(e => {
+                            cart.length > 0 ? cart.map((e, key) => {
                                 return (
 
-                                    meals.filter(item => e.id === item.id).map(el => {
+                                    meals.filter(item => e.id === item.id).map((el, key) => {
 
                                         return (
-                                            <div className="KorpaDiv">
+                                            <div key={key} className="KorpaDiv">
                                                 <img src={require("../../asesst/pizza.png")} alt="" />
 
                                                 <h3>{el.meal_name}</h3>
@@ -303,7 +288,7 @@ function App(props) {
                                     })
 
                                 )
-                            }) : <><img width={100} src={require("../../asesst/emCart.png")} /> <h3>Vaša korpa je trenutno prazna</h3></>
+                            }) : <><img width={100} src={require("../../asesst/emCart.png")} alt="praznaKorpa" /> <h3>Vaša korpa je trenutno prazna</h3></>
 
 
 
@@ -314,7 +299,7 @@ function App(props) {
                     </div>
                     {cart.length > 0 ?
                         <div className="CartFooter">
-                            <span>Total: {cart.map(e => { totalPrice += Number(e.price) })}{totalPrice}$</span>
+                            <span>Total: {cart.map((e) => { totalPrice += Number(e.price) })}{totalPrice}$</span>
                             <span>Delivery date: <input type="date" defaultValue={new Date().toISOString().split('T')[0]} min={new Date().toISOString().split('T')[0]} onChange={(e) => Setdate(e.currentTarget.value)} max={sevenDaysFromNowFormatted}></input>
                             </span>
                             <button onClick={() => mealOrder()}>Potvrdi</button>
@@ -326,11 +311,11 @@ function App(props) {
                 <div className="popup" >
 
                     <div ref={ref}>
-                        {meals.filter(meal => meal.id === FoodPopUp).map(e => {
+                        {meals.filter((meal) => meal.id === FoodPopUp).map((e, key) => {
                             return (
-                                <>
-                                    <Item korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} />
-                                </>
+                                <div key={key}>
+                                    <Item key={key} korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} />
+                                </div>
                             )
                         })}
                     </div>
