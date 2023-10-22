@@ -49,7 +49,7 @@ function App(props) {
     useEffect(() => {
 
         const FetchMeals = async () => {
-            await axios("http://4.232.160.128/api/meals", {
+            await axios(Config.apiUrl+"api/meals", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -60,7 +60,7 @@ function App(props) {
         }
 
         const categoiresFetch = async () => {
-            await axios.get("http://4.232.160.128/api/meals/categories", {
+            await axios.get(Config.apiUrl+"api/meals/categories", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -75,7 +75,7 @@ function App(props) {
     }, [token])
 
     const mealOrder = async () => {
-        await axios.post("http://4.232.160.128/api/orders/new",
+        await axios.post(Config.apiUrl+"api/orders/new",
             {
                 meals: cart.map(e => { return (e.id) }),
                 quantities: cart.map(e => { return (e.kolicina) }),
