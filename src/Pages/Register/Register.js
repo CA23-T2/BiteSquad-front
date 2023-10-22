@@ -7,6 +7,8 @@ import ellipseImage3 from "../../asesst/Ellipse12.png";
 import ellipseImage4 from "../../asesst/Ellipse9.png";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Config from "../../config.js"
+
 function RegisterForm() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -29,7 +31,7 @@ function RegisterForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        await axios.post("http://4.232.160.128/api/register", formData)
+        await axios.post(Config.apiUrl+"api/register", formData)
         .then(response => {
             console.log(response);
         })

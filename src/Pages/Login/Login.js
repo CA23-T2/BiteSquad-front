@@ -10,7 +10,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-
+import Config from "../../config"
 function LoginForm() {
   const Navigate =useNavigate();
   //const cookies = new Cookies();
@@ -44,7 +44,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    await axios.post("http://4.232.160.128/api/login", formData)
+    await axios.post(Config.apiUrl+"api/login", formData)
         .then(response => {
             console.log(response.data.data.token);
             const token = response.data.data.token;

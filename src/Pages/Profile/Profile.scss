@@ -1,0 +1,189 @@
+.ProfDesk {
+    display: flex;
+    justify-content: center;
+
+}
+
+.krug {
+    position: fixed;
+    top: -50px;
+    height: 210px;
+    width: 100vw;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 294px;
+        height: 75px;
+        margin-top: 20px;
+    }
+}
+
+.Profile {
+    width: 60%;
+    height: 300px;
+    border-radius: 15px;
+    background: #D07000;
+    margin-top: 120px;
+    z-index: 1;
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+
+    .helper {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 50px;
+
+        button {
+            border-radius: 20px;
+            background: #D9D9D9;
+            border: none;
+            padding: 10px;
+            width: 297px;
+            height: 50px;
+        }
+    }
+
+    .Text {
+
+        color: white;
+    }
+}
+.profMob {
+    display: none;
+}
+
+@media only screen and (max-width:425px) {
+    .ProfDesk {
+        display: none;
+    }
+
+    .profMob {
+        font-family: "Inter";
+      
+            margin: 0px;
+            padding: 0px 20px;
+
+         
+        header {
+            position: relative;
+            padding-left: 0px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .Content {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            .helper1
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                h2 {
+                    justify-self: center;
+                    font-weight: 100;
+                    margin-right: auto;
+                    padding: 0px;
+                
+                }
+                img {
+                    transform: rotate(-180deg);
+                    justify-self: flex-start;
+                    margin-right: auto;
+                }
+            }
+            .User {
+                border-bottom: 1px solid #B3B4BA;
+                border-top: 1px solid #B3B4BA;
+                padding: 10px 0px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                color: black;
+                justify-content: space-between;
+                align-items: center;
+               
+                margin: 0px;
+                img {
+                    width: 90px;
+                    border-radius: 50%;
+                }
+            }
+
+            .Opt {
+                padding: 10px 0px;
+                display: flex;
+                width: 100%;
+                text-align: center;
+                justify-content: space-evenly;
+                gap: 20px;
+                border-bottom: 1px solid #B3B4BA;
+                
+                margin: 0px;
+                div {
+                    padding: 0px;
+                    margin: 0px;
+                }
+
+            }
+
+            .General {
+                padding: 0px;
+                margin: 0px;
+                h2 {
+                    font-weight: 500;
+                    padding: 0px;
+                    margin: 0px;
+                }
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-self: flex-start;
+                width: 100%;
+                ul {
+                    padding: 0px;
+                    margin: 0px;
+                }
+                ul li {
+                   
+                    list-style: none;
+                    margin-top: 15px;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 400;
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    img {
+                        justify-self: flex-end;
+                        margin-left: auto;
+                    }
+                }
+            }
+
+        }
+    }
+}
