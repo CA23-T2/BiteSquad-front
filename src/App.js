@@ -22,57 +22,57 @@ function App() {
   const [userRole, setRole] = useState();
   const [load, setLoad] = useState(true);
   const token = Cookies.get('token');
-console.log(token);
+  console.log(token);
   useEffect(() => {
     const fetchApiData = async () => {
 
-      await axios.get(Config.apiUrl+"api/user", {
+      await axios.get(Config.apiUrl + "api/user", {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      .then((response) => {
+        .then((response) => {
           console.log(response);
-         setName(response.data.first_name + " " + response.data.last_name)
-         setRole(response.data.role);
-         setMail(response.data.email);
-         setUsername(response.data.username)
-      })
+          setName(response.data.first_name + " " + response.data.last_name)
+          setRole(response.data.role);
+          setMail(response.data.email);
+          setUsername(response.data.username)
+        })
     }
     if (token != null) {
       fetchApiData();
-    } 
+    }
 
   }, []);
   useEffect(() => {
-    window.addEventListener("load", () =>  {
+    window.addEventListener("load", () => {
       setLoad(false);
     })
   })
-  if(load === false) {
+  if (load === true) {
     return (
       <BrowserRouter>
-      <Routes>
-        <Route path='/'>
-          <Route index element={<><Header/><Home username={username}/></>}/>
-          <Route path='/item' element={<><Header/><Item/></>}/>
-          <Route path='/history' element={<><History/></>}/>
-          <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail}/><Nav></Nav></>}/>
-        </Route>
-        <Route>
-        <Route path="/Login" element={<Login/>}/>
-          <Route path="/Register" element={<Register/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    
+        <Routes>
+          <Route path='/'>
+            <Route index element={<><Header /><Home username={username} /></>} />
+            <Route path='/item' element={<><Header /><Item /></>} />
+            <Route path='/history' element={<><History /></>} />
+            <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail} /><Nav></Nav></>} />
+          </Route>
+          <Route>
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Register" element={<Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
 
-      );
-    
+
+    );
+
   } else {
-    return(<LoadingScreen/>)
+    return (<LoadingScreen />)
   }
-  
+
 }
 
 export default App;

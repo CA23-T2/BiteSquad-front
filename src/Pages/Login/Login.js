@@ -51,7 +51,7 @@ function LoginForm() {
             const token = response.data.data.token;
             Cookies.set('token', token, { expires: 7 });
 
-            Navigate("../Home");
+            Navigate("/");
         })
   };
 
