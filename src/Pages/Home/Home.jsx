@@ -1,5 +1,7 @@
+
 import home from "../../asesst/home.svg"
 import settings from "../../asesst/Setting.svg"
+
 import message from "../../asesst/Message.svg"
 import notifi from "../../asesst/Notification.svg";
 import users from "../../asesst/2User.svg";
@@ -12,22 +14,35 @@ import Exit from "../../asesst/Exit.svg"
 import bar from "../../asesst/bar.svg"
 import burger from "../../asesst/burger.svg"
 import arr from "../../asesst/arr.svg"
+
+
+import history from "../../asesst/history.svg"
+import cartt from "../../asesst/cart.svg"
 import "./Home.scss";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import Nav from "../../Nav";
 import Item from "../Item/Item"
-function App() {
-
-  // Dohvati podatke iz localStorage pri inicijalizaciji komponente
- 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+function App(props) {
+    const notify = () => toast.success("Porudžbina uspješno poslata", {
+        position: "top-center   ",
+    });
+    const ref = useRef(null);
+    useOutsideAlerter(ref);
+    // Dohvati podatke iz localStorage pri inicijalizaciji komponente
+    const [startDate, setStartDate] = useState(new Date());
     const token = Cookies.get('token');
     const crt = Cookies.get('cart');
     console.log(crt)
     const Navigate = useNavigate();
     const [meals, SetMeals] = useState([]);
+    const [date, Setdate] = useState();
     const [categories, SetCategories] = useState([]);
     const [cart, setCart] = useState([
 
@@ -46,7 +61,7 @@ function App() {
                 }
             })
                 .then(response => {
-                   // console.log(response.data.data[0].data)
+                    console.log(response.data.data)
                     SetMeals(response.data.data[0].data)
                 })
         }
@@ -71,14 +86,15 @@ function App() {
             {
                 meals: cart.map(e => { return (e.id) }),
                 quantities: cart.map(e => { return (e.kolicina) }),
-                delivery_date: "2023-10-13T15:30:00.000Z"
+                delivery_date: date
             }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
             .then(response => {
-               console.log(response);
+                console.log(response);
+                notify();
             })
     }
     //console.log(cart.some(item => item.id === 1))
@@ -87,7 +103,7 @@ function App() {
         if (cart.some(item => item.id === e.id)) {
             azurirajKolicinu(e.id, e.kolicina)
         } else {
-            setCart([...cart, { id: e.id, name: e.name, kolicina: e.kolicina }]); setAmount(1); setFoodPopUp(0);
+            setCart([...cart, { id: e.id, name: e.name, kolicina: e.kolicina, price: Number(e.price) * e.kolicina }]); setAmount(1); setFoodPopUp(0);
         }
     }
     const azurirajKolicinu = (id, kolicina) => {
@@ -103,19 +119,68 @@ function App() {
         setFoodPopUp(0) // Postavljamo ažuriranu kopiju niza kao novo stanje
     };
     const [page, setPage] = useState("home")
+    console.log(cart);
+    let totalPrice = 0;
+    const currentDate = new Date();
+
+  // Izračunajte datum koji je 7 dana u budućnosti
+  const sevenDaysFromNow = new Date(currentDate);
+  sevenDaysFromNow.setDate(currentDate.getDate() + 7);
+
+  // Pretvorite ova dva datuma u format koji očekuje input date
+  const currentDateFormatted = currentDate.toISOString().split('T')[0];
+  const sevenDaysFromNowFormatted = sevenDaysFromNow.toISOString().split('T')[0];
+
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                
+                setFoodPopUp(0);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+
+    });
+}
     return (
         <>
 
             <header className="Mob">
-                {page != "home" ? <img width={10} onClick={() => {setPage("home"); setFoodPopUp(0)}} src={arr} alt="" /> : <img src={bar} alt="" />}
+                {page != "home" ? <img width={10} onClick={() => { setPage("home"); setFoodPopUp(0) }} src={arr} alt="" /> : <img src={bar} alt="" />}
                 <h3>Kompanija</h3>
-                <img src={bar} alt="" />
+                <img onClick={() => Navigate("/Profile")}className="ProfImg"src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"/>
+
 
             </header>
             <section className="container">
 
-        <Nav></Nav>
                 
+                <nav>
+            <div className="active">
+                <img src={home} alt="" />
+            </div>
+            <div>
+                <img  src={history} onClick={() => Navigate("/history")}alt="" />
+            </div>
+            <div>
+                <img src={cartt} onClick={() => setPage("cart")} alt="" />
+            </div>
+            <div>
+                <img onClick={()=> Navigate("/profile")}src={users} alt="" />
+            </div>
+            <div>
+                <img src={settings} alt="" />
+            </div>
+            <div id="logout">
+                <img src={Exit} onClick={() => {Cookies.remove("token"); Navigate("/Login")}}alt="" />
+            </div>
+        </nav>
                 <section className="Center">
                     <h2 class="MobH2">Uživajte u ukusnoj hrani</h2>
                     <div className="filter">
@@ -146,7 +211,7 @@ function App() {
                         {
                             filter === 0 ?
                                 meals.map((e) => {
-                                    return (<div onClick={(event) => {setFoodPopUp(e.id); setPage("item")}} className="Meal">
+                                    return (<div onClick={(event) => { setFoodPopUp(e.id); setPage("item") }} className="Meal">
                                         <img src={require("../../asesst/burger.png")} alt="" />
                                         <h3>{e.meal_name}</h3>
                                         <p>{e.description}</p>
@@ -188,7 +253,7 @@ function App() {
                     }
                 </section>
                 <div className="korpa" id={page === "cart" ? "opened" : null}>
-                    <h2>Narudzba #Anja002</h2>
+                    <h2>Korpa</h2>
                     <div className="Helper">
                         <p>Naruceno</p>
                         <p>Kolicina</p>
@@ -196,9 +261,9 @@ function App() {
                     <hr />
                     <div className="List">
                         {
-                           cart.length >0 ? cart.map(e => {
+                            cart.length > 0 ? cart.map(e => {
                                 return (
-                                    
+
                                     meals.filter(item => e.id === item.id).map(el => {
 
                                         return (
@@ -213,12 +278,12 @@ function App() {
                                                     </span>
                                                 </div>
                                                 <div className="Mobile">
-                                                    <button onClick={()=> setAmount(Amount-1)}>-</button>
+                                                    <button onClick={() => setAmount(Amount - 1)}>-</button>
                                                     <span>{Amount}</span>
-                                                    <button onClick={()=> setAmount(Amount+1)}>+</button>
+                                                    <button onClick={() => setAmount(Amount + 1)}>+</button>
                                                 </div>
                                                 <div className="Options">
-                                                   
+
                                                     <span className="remove" onClick={(event) => { setCart(cart.filter((el) => el.id !== e.id)); console.log(e.id) }}>
                                                         <img src={trash} alt="" />
                                                     </span>
@@ -228,36 +293,44 @@ function App() {
 
 
                                     })
-                                    
+
                                 )
-                            }): <img width={100} src={require("../../asesst/emCart.png")}/>
+                            }) : <><img width={100} src={require("../../asesst/emCart.png")} /> <h3>Vaša korpa je trenutno prazna</h3></>
 
 
-                            
+
                         }
 
-                                     
-                        {cart.length >0 ? <button onClick={() => mealOrder()}>Potvrdi</button>: null}
+
 
                     </div>
+                    {cart.length > 0 ?
+                        <div className="CartFooter">
+                            <span>Total: {cart.map(e => { totalPrice += Number(e.price) })}{totalPrice}$</span>
+                            <span>Delivery date: <input type="date" defaultValue={new Date().toISOString().split('T')[0]} min={new Date().toISOString().split('T')[0]}onChange={(e) => Setdate(e.currentTarget.value)} max={sevenDaysFromNowFormatted}></input>
+                            </span>
+                            <button onClick={() => mealOrder()}>Potvrdi</button>
+                        </div> : null}
 
                 </div>
             </section>
             {FoodPopUp !== 0 ?
                 <div className="popup" >
 
-
-                    {meals.filter(meal => meal.id === FoodPopUp).map(e => {
+                <div ref={ref}>
+                {meals.filter(meal => meal.id === FoodPopUp).map(e => {
                         return (
                             <>
-                                <Item korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} />
+                                <Item korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} />
                             </>
                         )
                     })}
+                </div>
+                    
 
                 </div>
                 : null}
-
+    <ToastContainer />
         </>
     );
 }

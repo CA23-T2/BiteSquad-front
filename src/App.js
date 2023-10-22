@@ -13,13 +13,14 @@ import Cart from './Pages/Cart/Cart';
 import Profile from './Pages/Profile/Profile';
 import Nav from './Nav';
 import History from "./Pages/History/History"
+import LoadingScreen from "./LoadingScreen"
 function App() {
 
   const [userMail, setMail] = useState();
   const [Name, setName] = useState();
   const [username, setUsername] = useState();
   const [userRole, setRole] = useState();
- 
+  const [load, setLoad] = useState(true);
   const token = Cookies.get('token');
 console.log(token);
   useEffect(() => {
@@ -43,14 +44,18 @@ console.log(token);
     } 
 
   }, []);
-  return (
-
-    <BrowserRouter>
+  useEffect(() => {
+    window.addEventListener("load", () =>  {
+      setLoad(false);
+    })
+  })
+  if(load === false) {
+    return (
+      <BrowserRouter>
       <Routes>
         <Route path='/'>
-          <Route index element={<><Header/><Home/></>}/>
+          <Route index element={<><Header/><Home username={username}/></>}/>
           <Route path='/item' element={<><Header/><Item/></>}/>
-          <Route path='/Cart' element={<><Header/><Cart/></>}/>
           <Route path='/history' element={<><History/></>}/>
           <Route path='/Profile' element={<><Profile name={Name} username={username} email={userMail}/><Nav></Nav></>}/>
         </Route>
@@ -60,8 +65,14 @@ console.log(token);
         </Route>
       </Routes>
     </BrowserRouter>
+    
 
-  );
+      );
+    
+  } else {
+    return(<LoadingScreen/>)
+  }
+  
 }
 
 export default App;

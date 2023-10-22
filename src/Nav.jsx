@@ -3,28 +3,24 @@ import settings from "./asesst/Setting.svg"
 import message from "./asesst/Message.svg"
 import notifi from "./asesst/Notification.svg";
 import users from "./asesst/2User.svg";
-import BiteSquad from "./asesst/BiteSquad.svg"
-import trash from "./asesst/Trash.svg"
-import fire from "./asesst/fire.svg"
-import clock from "./asesst/clock.svg"
-import star from "./asesst/star.png"
-import Exit from "./asesst/Exit.svg"
-import bar from "./asesst/bar.svg"
-import burger from "./asesst/burger.svg"
+import history from "./asesst/history.svg"
+import cart from "./asesst/cart.svg"
+import { useNavigate } from "react-router-dom";
 function Nav() {
+    const Navigate = useNavigate()
     return (
         <nav>
             <div className="active">
                 <img src={home} alt="" />
             </div>
             <div>
-                <img  src={message} alt="" />
+                <img  src={history} onClick={() => Navigate("/history")}alt="" />
             </div>
             <div>
-                <img src={notifi} alt="" />
+                <img src={cart} alt="" />
             </div>
             <div>
-                <img src={users} alt="" />
+                <img onClick={()=> Navigate("/profile")}src={users} alt="" />
             </div>
             <div>
                 <img src={settings} alt="" />

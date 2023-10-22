@@ -44,7 +44,7 @@ function Item(props) {
                 <span><img src={clock} alt="" /> 35min</span>
             </div>
             <p>{props.desc}</p>
-            <button className="potvrdi" onClick={(e) => {props.korpa({id: props.id, name: props.meal_name, kolicina: Amount});  }}>Dodaj u korpu</button>
+            <button className="potvrdi" onClick={(e) => {props.korpa({id: props.id, name: props.meal_name, kolicina: Amount, price:props.price});  }}>Dodaj u korpu</button>
 
             
             

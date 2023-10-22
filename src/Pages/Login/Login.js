@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Config from "../../config"
+import { Link } from "react-router-dom";
 function LoginForm() {
   const Navigate =useNavigate();
   //const cookies = new Cookies();
@@ -23,7 +24,7 @@ function LoginForm() {
   useEffect(() => {
     let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token*\=\s*([^;]*).*$)|^.*$/, "$1");
     if(cookieValue !== "") {
-      Navigate("/Home");
+      Navigate("/");
     }
 })	
   const handleChange = (e) => {
@@ -112,7 +113,7 @@ function LoginForm() {
         </button>
       </form>
       <p className="boja-p">
-        Nemate nalog? <a href="#">Registruj se</a>
+        Nemate nalog? <Link to="/register">Registruj se</Link>
       </p>
     </div>
   );
