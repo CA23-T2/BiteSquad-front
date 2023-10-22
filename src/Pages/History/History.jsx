@@ -45,6 +45,10 @@ function History(props) {
         })
             .then(response => {
                 console.log(response)
+                notify(response.data.message);
+            })
+            .catch((error) => {
+                notify("Ne možete odbiti naružbu poslije 9h")
             })
     }
     const rateMeal = async () => {
@@ -159,7 +163,7 @@ function History(props) {
                                                 <span className="Status">{e.status}</span>
                                             </div>
 
-                                            {e.status === "Gotovo" ? null : <span className="otkazi" onClick={() => { cancel(e.id); notify("Porudžbina uspjesno otkazana"); setActive(0) }}>Otkaži</span>}
+                                            {e.status === "Gotovo" ? null : <span className="otkazi" onClick={() => { cancel(e.id);  setActive(0) }}>Otkaži</span>}
 
                                         </div>
                                         <h2>Obroci</h2>

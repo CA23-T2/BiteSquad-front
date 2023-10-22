@@ -11,13 +11,13 @@ function Nav() {
     const Navigate = useNavigate()
     return (
         <nav>
-                    <div className="active">
+                    <div className="active" onClick={() => Navigate("/Home")}>
                         <img src={home} alt="" />
                     </div>
                     <div>
                         <img src={history} onClick={() => Navigate("/history")} alt="" />
                     </div>
-                    <div id="cart">
+                    <div id="cart" onClick={() => Navigate("/Home")}>
                         <img  src={cartt}  alt="" />
                     </div>
                     <div id="profile">

@@ -86,7 +86,9 @@ function App(props) {
             }
         })
             .then(response => {
-                notify("Poružbina uspješno poslata");
+                console.log(response)
+                notify(response.data.message);
+                setCart([])
             })
     }
     //console.log(cart.some(item => item.id === 1))
