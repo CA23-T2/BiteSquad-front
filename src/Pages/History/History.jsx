@@ -161,9 +161,8 @@ function History(props) {
                                             </span>
                                             <div className="helperRow">
                                                 <p>Status:</p>
-                                                <span className="Status">{e.status}</span>
+                                                <span className="Status" >{e.status}</span>
                                             </div>
-
                                             {e.status === "Gotovo" ? null : <span className="otkazi" onClick={() => { cancel(e.id); setActive(0) }}>Otkaži</span>}
 
                                         </div>

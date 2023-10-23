@@ -19,8 +19,9 @@ function App() {
   const [username, setUsername] = useState();
   const [userRole, setRole] = useState();
   const [load, setLoad] = useState(false);
-  const token = Cookies.get('token');
   useEffect(() => {
+  const token = Cookies.get('token');
+
     const fetchApiData = async () => {
 
       await axios.get(Config.apiUrl + "api/user", {
@@ -39,7 +40,6 @@ function App() {
       console.log("a")
     } else {
       fetchApiData();
-
     }
 
   });

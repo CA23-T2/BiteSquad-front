@@ -22,6 +22,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Config from "../../config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faCartShopping} from "@fortawesome/free-solid-svg-icons";
+import { faClock,  } from "@fortawesome/free-regular-svg-icons";
 function App(props) {
     const notify = (e) => toast.success(e, {
         position: "top-center",
@@ -159,17 +161,22 @@ function App(props) {
 
 
                 <nav>
-                    <div className="active">
-                        <img src={home} alt="" />
+                    <div className={page === "home" ? "active" : ""} onClick={()=>setPage("home")}>
+                       <FontAwesomeIcon icon={faHome} color={page === "home" ? "white" : "#F9881F"}/>
                     </div>
                     <div>
-                        <img src={history} onClick={() => Navigate("/history")} alt="" />
+                       <FontAwesomeIcon icon={faClock} onClick={() => Navigate("/history")} size="1x" color="#F9881F    "/>
+                       
                     </div>
-                    <div id="cart">
-                        <img src={cartt} onClick={() => setPage("cart")} alt="" />
+                    <div id="cart" className={page === "cart" ? "active" : ""}>
+                       
+                       <FontAwesomeIcon icon={faCartShopping} onClick={() => setPage("cart")} size="1x" color={page === "cart" ? "white" : "#F9881F"}/>
+
+
                     </div>
                     <div id="profile">
                         <img onClick={() => Navigate("/profile")} src={users} alt="" />
+                        
                     </div>
 
                     <div id="logout">
@@ -212,9 +219,8 @@ function App(props) {
                                         <h3>{e.meal_name}</h3>
                                         <p>{e.description}</p>
                                         <div className="helper">
-                                            <span><img src={star} alt="" /> 4+</span>
-                                            <span><img src={fire} alt="" /> 300kcal</span>
-                                            <span><img src={clock} alt="" /> 35min</span>
+                                            <span>Price {e.price}$</span>
+                                            
                                         </div>
 
                                     </div>)
@@ -225,9 +231,8 @@ function App(props) {
                                         <h3>{e.meal_name}</h3>
                                         <p>{e.description}</p>
                                         <div className="helper">
-                                            <span><img src={star} alt="star" /> 4+</span>
-                                            <span><img src={fire} alt="fire" /> 300kcal</span>
-                                            <span><img src={clock} alt="clock" /> 35min</span>
+                                        <span>Price {e.price}$</span>
+
                                         </div>
 
                                     </div>)
@@ -318,7 +323,7 @@ function App(props) {
                         {meals.filter((meal) => meal.id === FoodPopUp).map((e, key) => {
                             return (
                                 <div key={key}>
-                                    <Item key={key} img={e.image_url} korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} />
+                                    <Item key={key} img={e.image_url} korpa={korpa} id={e.id} name={e.meal_name} desc={e.description} price={e.price} karakteristike={e.dietary_restrictions} />
                                 </div>
                             )
                         })}

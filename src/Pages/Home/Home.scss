@@ -110,7 +110,7 @@ section.Center {
        
 
         padding: 0px 20px;
-        margin-top: 20px;
+        margin-top: 30px;
         //width: 60%;
         display: flex;
         flex-direction: row;
@@ -629,9 +629,12 @@ section.container {
         .FoodPopUp {
             height: 100vh;
             min-width: 100vw;
-            
+            gap: 2px;
             align-items: center;
             justify-content: center;
+            img {
+                width: 140px;
+            }
         }
     }
 
