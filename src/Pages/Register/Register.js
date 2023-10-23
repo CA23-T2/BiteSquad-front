@@ -5,9 +5,13 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Config from "../../config.js"
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function RegisterForm() {
   const Navigate =useNavigate();
-
+  const notify = (e) => toast.error(e, {
+    position: "top-center", theme: "colored"
+  });
     useEffect(() => {
         if (Cookies.get("token") != null) {
             Navigate("/Home");
@@ -39,8 +43,10 @@ function RegisterForm() {
             console.log(response.data.data.token);
             const token = response.data.data.token;
             Cookies.set('token', token, { expires: 7 });
-
             Navigate("/Home");
+        })
+        .catch(err => {
+           notify("Popunite sva polja")
         })
     };
 
@@ -92,8 +98,10 @@ function RegisterForm() {
             <p className='boja-p'>Da li imate nalog? <Link to="/Login">Prijavi se</Link></p>
         </div>
        
+      <ToastContainer />
 
         </>
+
     );
 }
 
