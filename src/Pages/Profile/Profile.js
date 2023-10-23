@@ -53,7 +53,7 @@ function Profile(props) {
                     <div className="buttons">
                         <button onClick={() => { edit === true ? EditProfile() : setEdit(!edit) }}>{edit===true ?"Sacuvaj":"Uredi profil"}</button>
 
-                        <button>Istorija</button>
+                        <button onClick={() => Navigate("/history")}>Istorija</button>
                     </div>
                 </div>
                 <div className="Settings">
@@ -94,15 +94,15 @@ function Profile(props) {
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="" />
                     </div>
                     <div className="Opt">
-                        <div>
+                        <div onClick={() => Navigate("/history")}>
                             <img src={clock} alt="" />
                             <p>Istorija</p>
                         </div>
-                        <div>
+                        <div onClick={() => Navigate("/history")}>
                             <img src={clock} alt="" />
                             <p>Istorija</p>
                         </div>
-                        <div>
+                        <div onClick={() => Navigate("/history")}>
                             <img src={clock} alt="" />
                             <p>Istorija</p>
                         </div>
