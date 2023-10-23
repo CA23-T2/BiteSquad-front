@@ -132,7 +132,7 @@ section.Center {
             max-height: 240px;
             cursor: pointer;
             gap: 0px;
-
+            min-width: 180px;
             img {
                 margin-top: -45px;
                 width: 100px;
@@ -168,7 +168,8 @@ section.Center {
                 gap: 20px;
                 display: flex;
                 flex-direction: row;
-
+                justify-content: center;
+                width: 100%;
                 span {
                     font-size: 12px;
 
